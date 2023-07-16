@@ -37,3 +37,27 @@ test("text", async () => {
   await user.type(text, "-");
   expect(+text.value).toBe(0);
 });
+
+test("Add to cart", async () => {
+  const user = userEvent.setup();
+  render(<Item name="item1" price={10} />);
+
+  const plusButt = screen.getByRole("button", { name: "+" });
+  const minusButt = screen.getByRole("button", { name: "-" });
+  const addButt = screen.getByRole("button", { name: "Add to cart" });
+
+  const text = screen.getByRole("spinbutton");
+
+  await user.click(addButt);
+  expect(addButt.textContent).toBe("Edit Amount");
+  await user.click(plusButt);
+  expect(+text.value).toBe(0);
+  await user.click(minusButt);
+  expect(+text.value).toBe(0);
+  await user.click(minusButt);
+  expect(+text.value).toBe(0);
+  await user.type(text, "10");
+  expect(+text.value).toBe(0);
+  await user.type(text, "-");
+  expect(+text.value).toBe(0);
+});
