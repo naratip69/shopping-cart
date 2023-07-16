@@ -16,21 +16,32 @@ export default function Item({ name, price }) {
     });
   }
 
+  us;
+
   return (
     <div className="Item" id={name}>
       <div>{name}</div>
       <div>{price} Bath</div>
       <div className="logic">
-        <button type="button" onClick={(e) => addAmount(-1)}>
+        <button type="button" onClick={(e) => addAmount(-1)} disable={isInCart}>
           -
         </button>
         <input
           type="number"
           onChange={(e) => editAmount(+e.target.value)}
           value={amount}
+          disable={isInCart}
         />
-        <button type="button" onClick={(e) => addAmount(1)}>
+        <button type="button" onClick={(e) => addAmount(1)} disable={isInCart}>
           +
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            return setInCart((current) => !current);
+          }}
+        >
+          {isInCart ? "Add to cart" : "Edit Amount"}
         </button>
       </div>
     </div>
