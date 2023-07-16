@@ -9,7 +9,7 @@ export default function ShoppingCart() {
   return (
     <div className="shop">
       <h1>ShoppingCart</h1>
-      <Link to="/">Home</Link>
+      <Navbar itemList={itemList} />
       <ul>
         {itemList.map((e) => {
           return (
@@ -20,11 +20,13 @@ export default function ShoppingCart() {
           );
         })}
         <li>
-          total price:
-          {itemList.reduce((sum, e) => {
+          {itemList.length
+            ? `total price:
+          ${itemList.reduce((sum, e) => {
             return sum + e.price * e.amount;
           }, 0)}
-          Bath
+          Bath`
+            : "Cart is empty"}
         </li>
       </ul>
     </div>
